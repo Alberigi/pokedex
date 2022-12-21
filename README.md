@@ -1,5 +1,5 @@
 <h1 align="center">
-  stock-api
+  pokedex-api
 </h1>
 
 ## :rocket: Technology
@@ -7,13 +7,11 @@
 This project was developed with the following technologies:
 
 - [Node.js](https://nodejs.org/en/)
-- [MongoDB](https://www.mongodb.com/)
-- [Mongoose](https://mongoosejs.com/)
 - [Vitest](https://vitest.dev/)
 
 ## 💻 About this Project
 
-An api in node.js based on a stock purchase system, using mongoose for mongoDB operations, and Vitest for testing implementation.
+An api in node.js based on pokedex, using Vitest for testing implementation.
 
 ## Getting Started
   
@@ -25,8 +23,7 @@ An api in node.js based on a stock purchase system, using mongoose for mongoDB o
 
 ## Pending features
 
-- [ ] e2e tests
-- [ ] wallet balance
+- [ ] tests
 
 ---
 
