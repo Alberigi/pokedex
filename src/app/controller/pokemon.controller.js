@@ -42,4 +42,14 @@ router.post('/deletePokemon', async (req, res) => {
     }
 });
 
+router.post('/updatePokemon', async (req, res) => {
+    try {
+        const result = await pokemonService.update(req.body.indetification, req.body.data);
+        return res.send(result);
+    } catch (erro) {
+        console.log(erro);
+        return res.status(400).send({message: erro.message});
+    }
+});
+
 module.exports = app => app.use('/', router);

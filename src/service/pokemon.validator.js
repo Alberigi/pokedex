@@ -7,13 +7,25 @@ class PokemonValidator {
 
     validateSave(pokemon) { 
         this.checkProps(pokemon);
-        this.checkExist(pokemon);
+        this.checkExist(pokemon.name);
         this.checkType(pokemon.type);
     }
 
-    checkExist(pokemon) {
-        const result = this.pokemonRepository.findOne(pokemon.name);
-        if(result) throw Error(`${pokemon.name} already exists in pokedex`);
+    validateUpdate(indetification, data) {
+        this.checkIndetification(indetification);
+        this.checkProps(data);
+        this.checkType(data.type);
+        if (indetification !== data.name) this.checkExist(data.name)
+    }
+
+    checkExist(name) {
+        const result = this.pokemonRepository.findOne(name);
+        if(result) throw Error(`${name} already exists in pokedex`);
+    }
+
+    checkIndetification(indetification) {
+        const result = this.pokemonRepository.findOne(indetification);
+        if(!result) throw Error(`${indetification} not exists in pokedex`);
     }
     
     checkType(type) {

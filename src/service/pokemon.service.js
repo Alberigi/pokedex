@@ -22,6 +22,11 @@ class PokemonService {
     delete(name) {
        return this.pokemonRepository.remove(name);
     }
+    
+    update(indetification, data) {
+        this.pokemonValidator.validateUpdate(indetification,data);
+        return this.pokemonRepository.update(indetification,data);
+    }
 }
 
 module.exports = PokemonService;

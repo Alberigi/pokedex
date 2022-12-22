@@ -20,6 +20,13 @@ class PokemonRepository {
     this._pokemonsList.splice(index, 1)
     return pokemon;
   }
+
+  update(indetification,data) {
+    const pokemon = this._pokemonsList.find(p => p.name === indetification);
+    const index = this._pokemonsList.indexOf(pokemon);
+    this._pokemonsList.splice(index, 1, data)
+    return data;
+  }
 }
 
 module.exports = PokemonRepository;
