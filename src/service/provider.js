@@ -1,27 +1,9 @@
-const bcrypt = require("bcrypt-nodejs");
-const jwt = require("jwt-simple");
+const PokemonService = require('./pokemon.service');
+const PokemonValidator = require('./pokemon.validator');
 
-const CryptoService = require("./crypto.service");
-const UserService = require("./user.service");
-const AuthService = require("./auth.service");
-const StockService = require("./stock.service");
-const PortfolioService = require("./portfolio.service");
+const  {pokemonRepository, typeRepository} = require('../infra/repository/provider');
 
-const {
-  userRepository,
-  stockRepository,
-} = require("../infra/repository/provider");
+const pokemonValidator = new PokemonValidator(pokemonRepository, typeRepository);
+const pokemonService = new PokemonService(pokemonRepository, pokemonValidator, typeRepository);
 
-const cryptoService = new CryptoService(bcrypt, jwt);
-const userService = new UserService(cryptoService, userRepository);
-const stockService = new StockService(stockRepository);
-const portfolioService = new PortfolioService(stockService, userService);
-const authService = new AuthService(cryptoService, userService);
-
-module.exports = {
-  userService,
-  stockService,
-  cryptoService,
-  portfolioService,
-  authService,
-};
+module.exports = { pokemonService };
