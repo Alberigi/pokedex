@@ -6,25 +6,25 @@ class PokemonService {
         this.typeRepository = typeRepository; 
     }
     
-    getAll() {
+    async getAll() {
         return this.pokemonRepository.findAll();
     }
 
-    save(pokemon) {
-        this.pokemonValidator.validateSave(pokemon);
+    async save(pokemon) {
+        await this.pokemonValidator.validateSave(pokemon);
         return this.pokemonRepository.create(pokemon);
     }
 
-    getTypes() {
+    async getTypes() {
         return this.typeRepository.findAll();
     }
 
-    delete(name) {
+    async delete(name) {
        return this.pokemonRepository.remove(name);
     }
     
-    update(indetification, data) {
-        this.pokemonValidator.validateUpdate(indetification,data);
+    async update(indetification, data) {
+        await this.pokemonValidator.validateUpdate(indetification,data);
         return this.pokemonRepository.update(indetification,data);
     }
 }

@@ -5,26 +5,26 @@ class PokemonValidator {
         this.typeRepository = typeRepository; 
     }
 
-    validateSave(pokemon) { 
+    async validateSave(pokemon) { 
         this.checkProps(pokemon);
-        this.checkExist(pokemon.name);
+        await this.checkExist(pokemon.name);
         this.checkType(pokemon.type);
     }
 
-    validateUpdate(indetification, data) {
-        this.checkIndetification(indetification);
+    async validateUpdate(indetification, data) {
+        await this.checkIndetification(indetification);
         this.checkProps(data);
         this.checkType(data.type);
         if (indetification !== data.name) this.checkExist(data.name)
     }
 
-    checkExist(name) {
-        const result = this.pokemonRepository.findOne(name);
+    async checkExist(name) {
+        const result = await this.pokemonRepository.findOne(name);
         if(result) throw Error(`${name} already exists in pokedex`);
     }
 
-    checkIndetification(indetification) {
-        const result = this.pokemonRepository.findOne(indetification);
+    async checkIndetification(indetification) {
+        const result = await this.pokemonRepository.findOne(indetification);
         if(!result) throw Error(`${indetification} not exists in pokedex`);
     }
     

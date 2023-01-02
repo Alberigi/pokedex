@@ -1,31 +1,29 @@
 class PokemonRepository {
-  _pokemonsList = [];
+    _pokemonModel = {};
 
-  findAll() {
-    return this._pokemonsList;
+  constructor(pokemonModel) {
+    this._pokemonModel = pokemonModel;
   }
 
-  findOne(name) { 
-    return this._pokemonsList.find(p => p.name === name);
+  async findAll() {
+    return this._pokemonModel.find();
   }
 
-  create(pokemon) {
-    this._pokemonsList.push(pokemon);
-    return this.findOne(pokemon.name);
+  async findOne(name) { 
+    return this._pokemonModel.findOne({name});
   }
 
-  remove(name) { 
-    const pokemon = this._pokemonsList.find(p => p.name === name);
-    const index = this._pokemonsList.indexOf(pokemon);
-    this._pokemonsList.splice(index, 1)
-    return pokemon;
+  async create(pokemon) {
+    const result = await this._pokemonModel.create(pokemon);
+    return result.save();
   }
 
-  update(indetification,data) {
-    const pokemon = this._pokemonsList.find(p => p.name === indetification);
-    const index = this._pokemonsList.indexOf(pokemon);
-    this._pokemonsList.splice(index, 1, data)
-    return data;
+  async remove(name) { 
+    return this._pokemonModel.deleteOne({name});
+  }
+
+  async update(indetification,data) {
+    return this._pokemonModel.findOneAndUpdate({ name: indetification }, data);
   }
 }
 
