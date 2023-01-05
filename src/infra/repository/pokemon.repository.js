@@ -6,11 +6,11 @@ class PokemonRepository {
   }
 
   async findAll() {
-    return this._pokemonModel.find();
+    return this._pokemonModel.find().lean();
   }
 
   async findOne(name) { 
-    return this._pokemonModel.findOne({name});
+    return this._pokemonModel.findOne({name}).lean();
   }
 
   async create(pokemon) {

@@ -1,9 +1,8 @@
 class PokemonService {
 
-    constructor(pokemonRepository, pokemonValidator, typeRepository) {
+    constructor(pokemonRepository, pokemonValidator) {
         this.pokemonRepository = pokemonRepository; 
-        this.pokemonValidator = pokemonValidator; 
-        this.typeRepository = typeRepository; 
+        this.pokemonValidator = pokemonValidator;      
     }
     
     async getAll() {
@@ -13,10 +12,6 @@ class PokemonService {
     async save(pokemon) {
         await this.pokemonValidator.validateSave(pokemon);
         return this.pokemonRepository.create(pokemon);
-    }
-
-    async getTypes() {
-        return this.typeRepository.findAll();
     }
 
     async delete(name) {

@@ -15,5 +15,6 @@ app.use(express.json());
 
 
 require('./controller/pokemon.controller')(app);
+require('./controller/types.controller')(app);
 
 module.exports = app;

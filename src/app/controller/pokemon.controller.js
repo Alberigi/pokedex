@@ -16,19 +16,6 @@ router.get('/getPokemons', async (_, res) => {
     }
 });
 
-router.get('/getTypes', async (_, res) => {
-    try {
-        await dbConnection.startConnection();
-        const result = await pokemonService.getTypes();
-        return res.send(result);
-    } catch (erro) {
-        console.log(erro);
-        return res.status(500).send(erro);
-    } finally {
-        dbConnection.endConnection();
-    }
-});
-
 router.post('/savePokemon', async (req, res) => {
     try {
         await dbConnection.startConnection();

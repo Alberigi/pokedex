@@ -1,21 +1,21 @@
 class PokemonValidator {
 
-    constructor(pokemonRepository, typeRepository) {
+    constructor(pokemonRepository, typeService) {
         this.pokemonRepository = pokemonRepository; 
-        this.typeRepository = typeRepository; 
+        this.typeService = typeService; 
     }
 
     async validateSave(pokemon) { 
         this.checkProps(pokemon);
         await this.checkExist(pokemon.name);
-        this.checkType(pokemon.type);
+        await this.checkType(pokemon.type);
     }
 
     async validateUpdate(indetification, data) {
         await this.checkIndetification(indetification);
         this.checkProps(data);
-        this.checkType(data.type);
-        if (indetification !== data.name) this.checkExist(data.name)
+        await this.checkType(data.type);
+        if (indetification.toLowerCase() !== data.name.toLowerCase()) this.checkExist(data.name)
     }
 
     async checkExist(name) {
@@ -28,8 +28,8 @@ class PokemonValidator {
         if(!result) throw Error(`${indetification} not exists in pokedex`);
     }
     
-    checkType(type) {
-        const result = this.typeRepository.findOne(type);
+    async checkType(type) {
+        const result = await this.typeService.findOne(type);
         if(!result) throw Error(`Type of pokemon: ${type} not exists`);
     }
     

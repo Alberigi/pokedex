@@ -1,29 +1,21 @@
 class TypeRepository {
-  _types = [
-    'steel',
-    'fire',
-    'grass' ,
-    'electric' ,
-    'water' ,
-    'ice' ,
-    'ground' ,
-    'rock' ,
-    'fairy' ,
-    'poison'  ,
-    'bug'  ,
-    'dragon' ,
-    'psychic' ,
-    'flying' ,
-    'fighting' ,
-    'normal' ,
-  ];
+  _typesModel = [];
 
-  findAll() {
-    return this._types;
+  constructor(typesModel) {
+    this._typesModel = typesModel;
   }
 
-  findOne(type) {
-    return this._types.find(t => t === type);
+  async create(type) {
+    const result = await this._typesModel.create(type);
+    return result.save();
+  }
+
+  async findAll() {
+    return this._typesModel.find().lean();
+  }
+
+  async findOne(name) {
+    return this._typesModel.findOne({name}).lean();
   }
 }
 
