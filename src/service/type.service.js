@@ -5,7 +5,8 @@ class TypeService {
     }
 
     async getAll() {
-        return this.typeRepository.findAll();
+        const types = await this.typeRepository.findAll();
+        return types.map(type => type.name);
     }
 
     async getOne(type) {

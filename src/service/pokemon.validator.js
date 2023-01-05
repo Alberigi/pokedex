@@ -29,7 +29,7 @@ class PokemonValidator {
     }
     
     async checkType(type) {
-        const result = await this.typeService.findOne(type);
+        const result = await this.typeService.getOne(type);
         if(!result) throw Error(`Type of pokemon: ${type} not exists`);
     }
     
